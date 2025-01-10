@@ -20,3 +20,10 @@ def pregunta_10():
     D                   1:2:3:5:5:7
     E   1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
+    import pandas as pd
+    tbl0 = pd.read_csv("files/input/tbl0.tsv", sep='\t')
+    tbl = tbl0.copy()
+    tbl['c2'] = tbl["c2"].astype(str)
+    tbl = tbl.groupby('c1')["c2"].apply(lambda x: ":".join(sorted(x)))
+    tbl = pd.DataFrame(tbl)
+    return tbl
